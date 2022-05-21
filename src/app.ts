@@ -3,6 +3,7 @@ import cors from 'cors';
 import express from 'express';
 import { Router } from 'express';
 import usersRoute from './routes/usersRoute';
+import postsRoute from './routes/postsRoute';
 import { AppDataSource } from "./data-source"
 
 class App {
@@ -27,7 +28,8 @@ class App {
 
   public listen() {
     this.app.use(usersRoute());
-
+    this.app.use(postsRoute());
+    
     this.app.listen(this.port, () => {
       console.log(`Example app listening on port ${this.port}`)
     })

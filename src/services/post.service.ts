@@ -1,4 +1,4 @@
-import { AppDataSource } from "../data-source";
+import { AppDataSource } from "../../ormconfig";
 import { Post } from "../entities/post.entity";
 
 class PostService {
@@ -15,7 +15,7 @@ class PostService {
     }
     async create(Post: Post) {
         await AppDataSource.manager.save(Post)
-        return Post.id;
+        return Post;
     }
     async delete(PostID: number) {
         const postToRemove = await this.getOne(PostID);

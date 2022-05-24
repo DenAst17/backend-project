@@ -16,21 +16,21 @@ class PostController {
             res.json(result);
             return;
         }
-        res.status(404).json({ message: "The Post not found" });
+        res.status(404).json({ message: "The post not found" });
     }
     async createOne(req: Request, res: Response) {
         const post = new Post();
-        post.post_title = req.query.post_title as string;
-        post.post_text = req.query.post_text as string;
-        post.user_id = parseInt(req.query.user_id as string);
+        post.post_title = req.body.post_title as string;
+        post.post_text = req.body.post_text as string;
+        post.user_id = parseInt(req.body.user_id as string);
         const result = await postService.create(post);
-        res.json({ message: "Created Post id = " + result });
+        res.json(result);
     }
     async deleteOne(req: Request, res: Response) {
-        const PostID = req.params.id;
-        const result = await postService.delete(parseInt(PostID));
+        const postID = req.params.id;
+        const result = await postService.delete(parseInt(postID));
         if (result) {
-            res.json({ message: "Post deleted", title: result.post_title, text: result.post_text, author_id: result.user_id });
+            res.json({id: postID});
             return;
         }
         res.status(404).json({ message: "Post to delete not found" });
@@ -38,12 +38,12 @@ class PostController {
     async updateOne(req: Request, res: Response) {
         const PostID = req.params.id;
         const post = new Post();
-        post.post_title = req.query.post_title as string;
-        post.post_text = req.query.post_text as string;
-        post.user_id = parseInt(req.query.user_id as string);
+        post.post_title = req.body.post_title as string;
+        post.post_text = req.body.post_text as string;
+        post.user_id = parseInt(req.body.user_id as string);
         const result = await postService.update(parseInt(PostID), post);
         if (result) {
-            res.json({ message: "Updated Post id = " + result });
+            res.json({ message: "Updated post id = " + result });
             return;
         }
         res.status(404).json({ message: "Post to update not found" });

@@ -1,5 +1,5 @@
-import { User } from './entities/user.entity';
-import { Post } from './entities/post.entity';
+import { User } from './src/entities/user.entity';
+import { Post } from './src/entities/post.entity';
 import { join } from 'path';
 import { DataSource } from 'typeorm';
 
@@ -12,7 +12,8 @@ export const AppDataSource = new DataSource({
     database: process.env.DB_DATABASE,
     synchronize: false,
     logging: true,
-    entities: [User, Post],
+    entities: [join(__dirname, './src/entities/*.entity{.ts,.js}')],
     subscribers: [],
-    migrations: [],
+    migrations: [join(__dirname, './src/migration/*.migration{.ts,.js}')]
 })
+export default AppDataSource;

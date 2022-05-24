@@ -1,4 +1,4 @@
-import { AppDataSource } from "../data-source";
+import { AppDataSource } from "../../ormconfig";
 import { User } from "../entities/user.entity";
 
 class UserService {
@@ -15,7 +15,7 @@ class UserService {
     }
     async create(user: User) {
         await AppDataSource.manager.save(user)
-        return user.id;
+        return user;
     }
     async delete(userID: number) {
         const userToRemove = await this.getOne(userID);

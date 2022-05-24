@@ -1,5 +1,6 @@
-import { Router } from "express";
+import { response, Router } from "express";
 import UserController from "../controllers/user.controller";
+import HttpException from "../exceptions/http.exceptions";
 
 function usersRoute() {
     const router = Router();

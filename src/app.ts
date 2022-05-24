@@ -4,7 +4,7 @@ import express from 'express';
 import { Router } from 'express';
 import usersRoute from './routes/usersRoute';
 import postsRoute from './routes/postsRoute';
-import { AppDataSource } from "../ormconfig"
+import { AppDataSource } from "./data-source"
 import errorHandler from './middlewares/error.middleware';
 
 class App {

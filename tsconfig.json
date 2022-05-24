@@ -21,6 +21,6 @@
     "importHelpers": true,
     "baseUrl": "src"
   },
-  "include": ["src/**/*.ts", "src/**/*.json", ".env", "dataSource.ts"],
+  "include": ["src/**/*.ts", "src/**/*.json", ".env", "src/data-source.ts"],
   "exclude": ["node_modules", "src/http", "src/logs", "src/tests"]
 }

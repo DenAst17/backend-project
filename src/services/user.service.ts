@@ -1,4 +1,4 @@
-import { AppDataSource } from "../../ormconfig";
+import { AppDataSource } from "../data-source";
 import { User } from "../entities/user.entity";
 
 class UserService {

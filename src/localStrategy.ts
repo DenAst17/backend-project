@@ -1,6 +1,6 @@
 import { passport } from "passport";
 import { LocalStrategy } from "passport-local";
-import { crypto } from "crypto";
+import * as crypto from "crypto";
 
 passport.use(new LocalStrategy(
     function verify(username, password, cb) {
@@ -19,4 +19,4 @@ passport.use(new LocalStrategy(
         });
     });*/
 }
-);
+));

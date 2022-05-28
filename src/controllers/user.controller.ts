@@ -11,7 +11,7 @@ class UserController {
     }
     async getOne(req: Request, res: Response) {
         const userID = req.params.id;
-        const result = await userService.getOne(parseInt(userID));
+        const result = await userService.getByID(parseInt(userID));
         if (result) {
             res.json(result);
             return;

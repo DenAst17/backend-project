@@ -7,9 +7,15 @@ class UserService {
         const allUsers = await this.userRepository.find();
         return allUsers;
     }
-    async getOne(userID: number) {
+    async getByID(userID: number) {
         const foundUser = await this.userRepository.findOneBy({
             id: userID
+        })
+        return foundUser;
+    }
+    async getByEmail(userEmail: string) {
+        const foundUser = await this.userRepository.findOneBy({
+            email:userEmail
         })
         return foundUser;
     }
@@ -18,7 +24,7 @@ class UserService {
         return user;
     }
     async delete(userID: number) {
-        const userToRemove = await this.getOne(userID);
+        const userToRemove = await this.getByID(userID);
         if (userToRemove) {
             await this.userRepository.remove(userToRemove);
             return userToRemove;
@@ -31,7 +37,7 @@ class UserService {
         userToUpdate.email = user.email;
     }
     async update(userID: number, user: User) {
-        let userToUpdate = await this.getOne(userID);
+        let userToUpdate = await this.getByID(userID);
         if (userToUpdate) {
             this.updateInfo(userToUpdate, user);
             await this.userRepository.save(userToUpdate)

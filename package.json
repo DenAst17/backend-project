@@ -5,8 +5,13 @@
   "license": "MIT",
   "scripts": {
     "start": "cross-env ts-node-dev ./src/server.ts",
+    "build": "swc src -d dist --source-maps --copy-files",
+    "build:tsc": "tsc && tsc-alias",
     "typeorm": "typeorm-ts-node-commonjs",
-    "migration:generate": "typeorm-ts-node-commonjs migration:generate -d ./src/data-source.ts ./src/migration/PW-migration"
+    "migration:generate": "typeorm-ts-node-commonjs migration:generate -d ./src/data-source.ts ./src/migration/PW-migration",
+    "migration:run": "typeorm-ts-node-commonjs migration:run -d ./src/data-source.ts",
+    "migration:runjs": "typeorm-ts-node-commonjs migration:run -d ./dist/data-source.js",
+    "migration:create": "typeorm-ts-node-commonjs migration:create"
   },
   "dependencies": {
     "cookie-parser": "^1.4.5",
@@ -17,6 +22,7 @@
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "reflect-metadata": "^0.1.13",
+    "tsc-alias": "^1.6.7",
     "typeorm": "^0.3.6"
   },
   "devDependencies": {

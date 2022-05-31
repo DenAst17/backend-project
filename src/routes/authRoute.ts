@@ -1,5 +1,5 @@
 import { Router } from "express";
-import passport from "passport";
+import passport from "../middlewares/serialize.middleware";
 import AuthController from "../controllers/auth.controller";
 import HttpException from "../exceptions/http.exceptions";
 

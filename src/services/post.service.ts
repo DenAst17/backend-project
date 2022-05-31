@@ -1,4 +1,4 @@
-import { AppDataSource } from "../data-source";
+import { AppDataSource } from "../config/data-source";
 import { Post } from "../entities/post.entity";
 
 class PostService {

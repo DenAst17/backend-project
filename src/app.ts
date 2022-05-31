@@ -5,9 +5,11 @@ import { Router } from 'express';
 import usersRoute from './routes/usersRoute';
 import postsRoute from './routes/postsRoute';
 import authRoute from './routes/authRoute';
-import { AppDataSource } from "./data-source"
+import { AppDataSource } from "./config/data-source"
 import errorHandler from './middlewares/error.middleware';
-import passport from './localStrategy';
+import passport from './config/localStrategy';
+import session from 'express-session'
+import { CookieSessionConfig } from './config/cookieSessionConfig';
 
 class App {
   public app: express.Application;
@@ -21,6 +23,8 @@ class App {
     this.initializeDB();
     this.app.use(express.json());
     this.app.use(passport.initialize());
+    this.app.use(session(CookieSessionConfig));
+    this.app.use(passport.authenticate('session'));
   }
 
   public initializeDB() {

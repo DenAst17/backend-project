@@ -1,14 +1,14 @@
 import passport from "passport";
 import LocalStrategy from "passport-local";
 import * as crypto from "crypto";
-import UserService from "./services/user.service";
+import UserService from "../services/user.service";
 
 passport.use(new LocalStrategy(
     { // or whatever you want to use
         usernameField: 'email',    // define the parameter in req.body that passport can use as username and password
         passwordField: 'password'
     },
-    function verify(username, password, cb) {
+    function verify(username, password, cb: any) {
         console.log(username, password);
         const userService = new UserService();
         userService.getByEmail(username).then((resUser) => {

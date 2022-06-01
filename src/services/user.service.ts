@@ -35,6 +35,7 @@ class UserService {
         userToUpdate.name = user.name;
         userToUpdate.surname = user.surname;
         userToUpdate.email = user.email;
+        userToUpdate.password = user.password;
     }
     async update(userID: number, user: User) {
         let userToUpdate = await this.getByID(userID);

@@ -1,6 +1,7 @@
 import { User } from "../entities/user.entity";
 import { Request, Response } from "express";
 import UserService from "../services/user.service";
+import { getHash } from "../config/bcryptHashGenerator";
 
 const userService = new UserService();
 
@@ -23,6 +24,7 @@ class UserController {
         user.name = req.body.name as string;
         user.surname = req.body.surname as string;
         user.email = req.body.email as string;
+        user.password = getHash(req.body.password);
         const result = await userService.create(user);
         res.json(result);
     }
@@ -41,6 +43,7 @@ class UserController {
         user.name = req.body.name as string;
         user.surname = req.body.surname as string;
         user.email = req.body.email as string;
+        user.password = getHash(req.body.password);
         const result = await userService.update(parseInt(userID), user);
         if (result) {
             res.json({ message: "Updated user id = " + result });

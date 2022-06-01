@@ -10,10 +10,11 @@
     "typeorm": "typeorm-ts-node-commonjs",
     "migration:generate": "typeorm-ts-node-commonjs migration:generate -d ./src/data-source.ts ./src/migration/PW-migration",
     "migration:run": "typeorm-ts-node-commonjs migration:run -d ./src/data-source.ts",
-    "migration:runjs": "typeorm-ts-node-commonjs migration:run -d ./dist/data-source.js",
     "migration:create": "typeorm-ts-node-commonjs migration:create"
   },
   "dependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "bcrypt": "^5.0.1",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",

@@ -2,7 +2,10 @@ import passport from "passport";
 import LocalStrategy from "passport-local";
 import * as crypto from "crypto";
 import UserService from "../services/user.service";
-import { compareToHash } from "./bcryptHashGenerator";
+import { compareToHash } from "../utils/bcryptHashGenerator";
+import jwt from 'passport-jwt'
+
+const userService = new UserService();
 
 passport.use(new LocalStrategy(
     { // or whatever you want to use
@@ -11,19 +14,18 @@ passport.use(new LocalStrategy(
     },
     function verify(username: string, password: string, cb: any) {
         console.log(username, password);
-        const userService = new UserService();
         userService.getByEmail(username).then((resUser) => {
 
-            if(!resUser) {
+            if (!resUser) {
                 throw new Error('Incorrect username or password.');
             }
 
             const isEqual = compareToHash(password, resUser.password)
 
-            if(isEqual) {
+            if (isEqual) {
                 return cb(null, resUser);
             }
-
+            console.log("-????");
             throw new Error('Incorrect username or password.');
 
         }).catch((err) => {
@@ -31,4 +33,20 @@ passport.use(new LocalStrategy(
         });
     }
 ));
+
+const options = {
+    jwtFromRequest: jwt.ExtractJwt.fromAuthHeaderAsBearerToken(),
+    secretOrKey: process.env.APP_KEY,
+};
+
+passport.use(new jwt.Strategy(options, (jwtPayload, cb) => {
+    userService.getByEmail(jwtPayload)
+        .then(user => {
+            return cb(null, user);
+        })
+        .catch(err => {
+            return cb(err);
+        });
+}));
+
 export default passport;

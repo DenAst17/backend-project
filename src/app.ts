@@ -9,7 +9,7 @@ import { AppDataSource } from "./config/data-source"
 import errorHandler from './middlewares/error.middleware';
 import passport from './config/localStrategy';
 import session from 'express-session'
-import { CookieSessionConfig } from './config/cookieSessionConfig';
+import { sessionConfig } from './config/sessionConfig'
 
 class App {
   public app: express.Application;
@@ -23,7 +23,7 @@ class App {
     this.initializeDB();
     this.app.use(express.json());
     this.app.use(passport.initialize());
-    this.app.use(session(CookieSessionConfig));
+    this.app.use(session(sessionConfig));
     this.app.use(passport.authenticate('session'));
   }
 

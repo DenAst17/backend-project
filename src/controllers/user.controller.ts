@@ -1,7 +1,7 @@
 import { User } from "../entities/user.entity";
 import { Request, Response } from "express";
 import UserService from "../services/user.service";
-import { getHash } from "../config/bcryptHashGenerator";
+import { getHash } from "../utils/bcryptHashGenerator";
 
 const userService = new UserService();
 

@@ -6,6 +6,7 @@ import {Post} from '../entities/post.entity'
 import { Like } from '../entities/like.entity';
 import { passwordAdded1653747646999 } from '../migration/1653747646999-password-added'
 import { alterPosts1654358181510 } from '../migration/1654358181510-alter_posts';
+import { addExpiredAtToPosts1654417652969 } from '../migration/1654417652969-add_expired_at_to_posts';
 
 export const AppDataSource = new DataSource({
   type: 'mysql',
@@ -18,5 +19,5 @@ export const AppDataSource = new DataSource({
   logging: true,
   entities: [User, Post, Like], // join(__dirname, './src/entities/*.entity{.ts,.js}')
   subscribers: [],
-  migrations: [passwordAdded1653747646999, alterPosts1654358181510], // join(__dirname, 'migration/*.ts')
+  migrations: [passwordAdded1653747646999, alterPosts1654358181510, addExpiredAtToPosts1654417652969], // join(__dirname, 'migration/*.ts')
 });

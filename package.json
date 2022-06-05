@@ -11,7 +11,7 @@
     "migration:generate": "typeorm-ts-node-commonjs migration:generate -d ./src/data-source.ts ./src/migration/PW-migration",
     "migration:run": "typeorm-ts-node-commonjs migration:run -d ./src/config/data-source.ts",
     "migration:revert": "typeorm-ts-node-commonjs migration:revert -d ./src/config/data-source.ts",
-    "migration:create": "typeorm-ts-node-commonjs migration:create ./src/migration/STH"
+    "migration:create": "typeorm-ts-node-commonjs migration:create ./src/migration/add_expired_at_to_posts"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",

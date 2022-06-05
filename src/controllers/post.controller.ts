@@ -48,5 +48,14 @@ class PostController {
         }
         res.status(404).json({ message: "Post to update not found" });
     }
+    async restoreOne(req: Request, res: Response) {
+        const postID = req.params.id;
+        const result = await postService.restore(parseInt(postID));
+        if (result) {
+            res.json({id: postID});
+            return;
+        }
+        res.status(404).json({ message: "Post to restore not found" });
+    }
 }
 export default PostController;

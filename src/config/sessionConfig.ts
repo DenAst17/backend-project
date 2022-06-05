@@ -4,7 +4,7 @@ export const sessionConfig = {
     cookie: {
         maxAge: Number(process.env.SESSION_LIFETIME || 60) * 60 * 1000,
         secure: false,
-        httpOnly: false,
+        httpOnly: true,
       },
     resave: false,
     saveUninitialized: false

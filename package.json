@@ -9,8 +9,9 @@
     "build:tsc": "tsc && tsc-alias",
     "typeorm": "typeorm-ts-node-commonjs",
     "migration:generate": "typeorm-ts-node-commonjs migration:generate -d ./src/data-source.ts ./src/migration/PW-migration",
-    "migration:run": "typeorm-ts-node-commonjs migration:run -d ./src/data-source.ts",
-    "migration:create": "typeorm-ts-node-commonjs migration:create"
+    "migration:run": "typeorm-ts-node-commonjs migration:run -d ./src/config/data-source.ts",
+    "migration:revert": "typeorm-ts-node-commonjs migration:revert -d ./src/config/data-source.ts",
+    "migration:create": "typeorm-ts-node-commonjs migration:create ./src/migration/STH"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
@@ -21,6 +22,7 @@
     "express-session": "^1.17.3",
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
+    "node-cron": "^3.0.0",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",

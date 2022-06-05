@@ -10,6 +10,7 @@ function postsRoute() {
     router.post('/api/posts', jwtAuthenticate, postController.createOne);
     router.delete('/api/posts/:id', jwtAuthenticate, postController.deleteOne);
     router.patch('/api/posts/:id', jwtAuthenticate, postController.updateOne);
+    router.put('/api/posts/:id', jwtAuthenticate, postController.restoreOne)
     //router.get('/api/users/:id/posts', postController.getUserPosts);
     //router.get('/api/users/:userID/posts/:postID', postController.getUserPost);
     return router;

@@ -16,11 +16,11 @@ class AuthController {
         }
         res.status(404).json({ message: "The user not found" });
     }
-    async logout(req: Request, res: Response) {
-        /*req.logout((err) => {
+    async logout(req: Request, res: Response, next) {
+        req.logout((err) => {
             if (err) { return next(err); }
             res.json({});
-        });*/
+        });
         res.json({});
     }
 }

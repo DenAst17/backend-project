@@ -5,6 +5,7 @@ class PostService {
     postRepository = AppDataSource.getRepository(Post);
     async getAll() {
         const allPosts = await this.postRepository.find();
+        console.log(allPosts);
         return allPosts;
     }
     async getOne(PostID: number) {
@@ -17,13 +18,35 @@ class PostService {
         await AppDataSource.manager.save(Post)
         return Post;
     }
-    async delete(PostID: number) {
-        const postToRemove = await this.getOne(PostID);
-        if (postToRemove) {
-            await this.postRepository.remove(postToRemove);
-            return postToRemove;
+    async delete(postID: number) {
+        const foundPost = await this.postRepository.findOneBy({
+            id: postID
+        });
+        if (!foundPost) {
+            return null;
         }
-        return null;
+        await AppDataSource
+            .createQueryBuilder()
+            .softDelete()
+            .from(Post)
+            .where("id = :id", { id: postID })
+            .execute();
+        return postID;
+    }
+    async restore(postID: number) {
+        await AppDataSource
+            .createQueryBuilder()
+            .restore()
+            .from(Post)
+            .where("id = :id", { id: postID })
+            .execute();
+        const foundPost = await this.postRepository.findOneBy({
+            id: postID
+        });
+        if (!foundPost) {
+            return null;
+        }
+        return postID;
     }
     updateInfo(postToUpdate: Post, Post: Post) {
         postToUpdate.post_title = Post.post_title;

@@ -8,12 +8,16 @@ const userService = new UserService();
 class UserController {
     async getAll(req: Request, res: Response) {
         const allUsers = await userService.getAll();
+        allUsers.forEach(user => {
+            delete user.password;
+        });
         res.json(allUsers);
     }
     async getOne(req: Request, res: Response) {
         const userID = req.params.id;
         const result = await userService.getByID(parseInt(userID));
         if (result) {
+            delete result.password;
             res.json(result);
             return;
         }
@@ -26,6 +30,7 @@ class UserController {
         user.email = req.body.email as string;
         user.password = getHash(req.body.password);
         const result = await userService.create(user);
+        delete result.password;
         res.json(result);
     }
     async deleteOne(req: Request, res: Response) {
@@ -43,7 +48,7 @@ class UserController {
         user.name = req.body.name as string;
         user.surname = req.body.surname as string;
         user.email = req.body.email as string;
-        user.password = getHash(req.body.password);
+        delete user.password;
         const result = await userService.update(parseInt(userID), user);
         if (result) {
             res.json({ message: "Updated user id = " + result });

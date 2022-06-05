@@ -10,6 +10,7 @@ import errorHandler from './middlewares/error.middleware';
 import passport from './config/localStrategy';
 import session from 'express-session'
 import { sessionConfig } from './config/sessionConfig'
+import checkOldPosts from './middlewares/cron.middeware';
 
 class App {
   public app: express.Application;
@@ -21,6 +22,7 @@ class App {
     this.env = process.env.NODE_ENV || 'development';
     this.port = process.env.PORT || 3000;
     this.initializeDB();
+    checkOldPosts();
     this.app.use(express.json());
     this.app.use(passport.initialize());
     this.app.use(session(sessionConfig));

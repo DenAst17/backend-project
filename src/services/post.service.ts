@@ -5,7 +5,6 @@ class PostService {
     postRepository = AppDataSource.getRepository(Post);
     async getAll() {
         const allPosts = await this.postRepository.find();
-        console.log(allPosts);
         return allPosts;
     }
     async getOne(PostID: number) {

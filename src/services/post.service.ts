@@ -13,9 +13,8 @@ class PostService {
         })
         return foundPost;
     }
-    async create(Post: Post) {
-        await AppDataSource.manager.save(Post)
-        return Post;
+    async create(post: Post) {
+        await AppDataSource.manager.save(post);
     }
     async delete(postID: number) {
         const foundPost = await this.postRepository.findOneBy({

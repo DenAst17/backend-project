@@ -2,6 +2,7 @@ import { Post } from "../entities/post.entity";
 import { Request, Response } from "express";
 import PostService from "../services/post.service";
 import { DateTime } from "luxon";
+import { addPostToQueue } from "../middlewares/queue.middleware";
 
 const postService = new PostService();
 
@@ -40,17 +41,8 @@ class PostController {
         res.status(404).json({ message: "The post not found" });
     }
     async createOne(req: Request, res: Response) {
-        const post = new Post();
-        post.post_title = req.body.post_title as string;
-        post.post_text = req.body.post_text as string;
-        post.user_id = parseInt(req.body.user_id as string);
-        if (req.body.expired_at) {
-            const dateTime = req.body.expired_at;
-            post.expired_at = dateTime;
-            console.log(post.expired_at);
-        }
-        const result = await postService.create(post);
-        res.json(result);
+        await addPostToQueue(req.body);
+        res.json({message: "Post added to queue"});
     }
     async deleteOne(req: Request, res: Response) {
         const postID = req.params.id;

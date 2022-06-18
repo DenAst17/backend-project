@@ -11,6 +11,7 @@ import passport from './config/localStrategy';
 import session from 'express-session'
 import { cookieSessionConfig, dbSessionConfig } from './config/sessionConfig'
 import checkOldPosts from './middlewares/cron.middeware';
+import helmet from 'helmet';
 
 class App {
   public app: express.Application;
@@ -27,6 +28,7 @@ class App {
     this.app.use(passport.initialize());
     this.app.use(session(dbSessionConfig));
     this.app.use(passport.authenticate('session'));
+    this.app.use(helmet());
   }
 
   public initializeDB() {

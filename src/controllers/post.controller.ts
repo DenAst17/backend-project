@@ -8,6 +8,7 @@ const postService = new PostService();
 
 class PostController {
     async getAll(req: Request, res: Response) {
+        console.log(req.session);
         const allPosts = await postService.getAll();
         const postsToShow = [];
         allPosts.forEach(post => {

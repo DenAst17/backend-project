@@ -9,7 +9,7 @@ import { AppDataSource } from "./config/data-source"
 import errorHandler from './middlewares/error.middleware';
 import passport from './config/localStrategy';
 import session from 'express-session'
-import { sessionConfig } from './config/sessionConfig'
+import { cookieSessionConfig, dbSessionConfig } from './config/sessionConfig'
 import checkOldPosts from './middlewares/cron.middeware';
 
 class App {
@@ -25,7 +25,7 @@ class App {
     checkOldPosts();
     this.app.use(express.json());
     this.app.use(passport.initialize());
-    this.app.use(session(sessionConfig));
+    this.app.use(session(dbSessionConfig));
     this.app.use(passport.authenticate('session'));
   }
 
